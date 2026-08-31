@@ -5,7 +5,7 @@ const ASSETS_TO_CACHE = [
   '/manifest.json'
 ];
 
-// התקנת ה-Service Worker ושמירת הקבצים
+// Install the service worker and cache application files.
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
