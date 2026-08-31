@@ -1,10 +1,10 @@
 {
-  "name": "האפליקציה של אביתר",
-  "short_name": "אביתר",
+  "name": "קינג אביתר - מעקב אימונים",
+  "short_name": "קינג אביתר",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#f4f4f9",
-  "theme_color": "#2b2b2b",
+  "background_color": "#0b1326",
+  "theme_color": "#111c31",
   "orientation": "portrait",
   "icons": [
     {

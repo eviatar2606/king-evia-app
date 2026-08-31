@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>האפליקציה של אביתר</title>
+    <title>קינג אביתר | אימונים</title>
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#2b2b2b">
+    <meta name="theme-color" content="#111c31">
     <style>
         body {
             font-family: system-ui, -apple-system, sans-serif;
@@ -28,22 +28,75 @@
             text-align: center;
             margin-top: 50px;
         }
-    </style>
+        </style>
+        <style>
+            :root { --ink:#eaf0fa; --muted:#9eabc1; --panel:#1a2841; --line:#34435b; --lime:#ceee93; --cyan:#7bd0ff; --orange:#ffc979; --red:#ffb4ab; }
+            * { box-sizing:border-box; }
+            body { margin:0; min-height:100vh; background:linear-gradient(150deg,#0b1326,#142340 60%,#102c39); color:var(--ink); font:16px system-ui,-apple-system,"Segoe UI",sans-serif; }
+            .container { all:unset; }
+            button,input,select { font:inherit; } button { cursor:pointer; }
+            .shell { max-width:680px; min-height:100vh; margin:auto; padding:70px 16px 88px; }
+            header { position:fixed; inset:0 0 auto; z-index:5; height:56px; background:rgba(11,19,38,.93); border-bottom:1px solid var(--line); backdrop-filter:blur(14px); display:flex; align-items:center; justify-content:center; }
+            .brand { width:min(648px,100%); padding:0 16px; display:flex; align-items:center; gap:10px; font-weight:800; }.brand-mark { width:28px; height:28px; border-radius:7px; background:var(--lime); color:#193100; display:grid; place-items:center; }h1,h2,h3,p{margin:0}h1{font-size:1.1rem}h2{font-size:1.1rem}h3{font-size:1rem}
+            .page-title{color:var(--muted);font-size:.73rem;margin-bottom:14px;letter-spacing:.08em}.grid{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}.panel{background:rgba(26,40,65,.86);border:1px solid var(--line);border-radius:8px;padding:16px;box-shadow:0 12px 35px rgba(0,0,0,.14)}.hero{background:linear-gradient(135deg,#293d4c,#234b42);text-align:center}.eyebrow{color:var(--muted);font-size:.72rem;font-weight:700;letter-spacing:.08em}.metric{margin:7px 0;color:var(--lime);font-size:2.6rem;font-weight:800;line-height:1}.submetric{color:var(--cyan);font-weight:700}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.muted{color:var(--muted);font-size:.88rem}.actions{display:flex;gap:8px;margin-top:14px}
+            .button{min-height:42px;border:1px solid transparent;border-radius:7px;padding:8px 13px;background:var(--lime);color:#193100;font-weight:800;flex:1}.button.secondary{background:transparent;border-color:var(--line);color:var(--ink)}.button.danger{background:transparent;border-color:#925b60;color:var(--red)}.button:disabled{opacity:.45;cursor:not-allowed}.water{height:95px;overflow:hidden;position:relative;margin:12px 0;border:1px solid rgba(123,208,255,.35);border-radius:7px;background:#101c32}.water>div{position:absolute;bottom:0;width:100%;background:linear-gradient(90deg,rgba(123,208,255,.65),rgba(206,238,147,.65));transition:height .35s}.rating{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:14px}.rating button{min-height:40px;background:#101c32;border:1px solid var(--line);border-radius:7px;color:var(--ink);font-weight:800}
+            nav{position:fixed;z-index:5;bottom:0;left:0;right:0;height:72px;background:rgba(11,19,38,.96);border-top:1px solid var(--line);display:flex;justify-content:center;backdrop-filter:blur(14px)}nav .nav-inner{width:min(680px,100%);display:grid;grid-template-columns:repeat(5,1fr)}.tab{border:0;background:none;color:var(--muted);font-size:.68rem;padding:8px 3px;display:grid;place-items:center;gap:3px}.tab strong{font-size:1.1rem;line-height:1}.tab.active{color:var(--lime)}.exercise{padding:14px 0;border-bottom:1px solid rgba(158,171,193,.18)}.exercise:last-child{border-bottom:0;padding-bottom:0}.tag{display:inline-block;padding:3px 7px;border:1px solid rgba(123,208,255,.45);color:var(--cyan);border-radius:99px;font-size:.72rem}.filter{width:100%;min-height:42px;border-radius:7px;border:1px solid var(--line);background:#101c32;color:var(--ink);padding:8px 10px;margin:10px 0}.schedule{display:grid;gap:8px}.slot{padding:11px;border:1px solid var(--line);border-radius:7px;background:#101c32}.slot button{float:left;padding:5px 9px;border:0;border-radius:5px;background:var(--lime);color:#193100;font-weight:800}
+            .timer{text-align:center;font-variant-numeric:tabular-nums;font-size:3rem;font-weight:800;color:var(--lime);margin:12px 0}.set{display:grid;grid-template-columns:42px 1fr 1fr 90px;align-items:center;gap:8px;margin-top:10px}.set input{width:100%;min-height:38px;padding:7px;background:#101c32;border:1px solid var(--line);border-radius:5px;color:var(--ink)}.set button{min-height:38px;border:0;border-radius:5px;background:var(--cyan);color:#042437;font-weight:800}.done{color:var(--lime);font-size:.8rem}.empty{color:var(--muted);text-align:center;padding:24px 8px}.modal{position:fixed;z-index:9;inset:0;background:rgba(0,0,0,.64);display:grid;align-items:end;padding:16px}.modal-box{max-width:650px;width:100%;margin:auto;background:#17243c;border:1px solid var(--line);border-radius:8px;padding:20px}.check{display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:1px solid rgba(158,171,193,.15)}.check:last-of-type{border:0}.notice{color:var(--orange);font-size:.84rem;line-height:1.5;margin:10px 0}.history-item{padding:11px 0;border-bottom:1px solid rgba(158,171,193,.16)}@media(max-width:390px){.set{grid-template-columns:34px 1fr 1fr}.set button{grid-column:2/4}.metric{font-size:2.25rem}}
+        </style>
 </head>
 <body>
     <div class="container">
-        <h1>האפליקציה של אביתר</h1>
-        <p>התשתית מוכנה. אפשר להתחיל לכתוב את הלוגיקה.</p>
+        <header><div class="brand"><div class="brand-mark">K</div><h1>קינג אביתר</h1><span id="headerTitle" class="muted"></span></div></header>
+        <main id="app" class="shell"></main>
+        <nav><div class="nav-inner" id="nav"></div></nav>
+        <script>
+            const exercises = [
+                {id:'chest-press',name:'לחיצת חזה York 401',group:'חזה',sets:3,reps:10,unit:'פלטות'},
+                {id:'flyes',name:'פרפר משקולות בשכיבה',group:'חזה',sets:3,reps:12,unit:'ק"ג'},
+                {id:'cable-row',name:'חתירה בכבל בישיבה',group:'גב',sets:3,reps:10,unit:'ק"ג'},
+                {id:'leg-press',name:'לחיצת רגליים',group:'רגליים',sets:3,reps:12,unit:'ק"ג'},
+                {id:'leg-curl',name:'כפיפת ברך בשכיבה',group:'רגליים',sets:3,reps:12,unit:'ק"ג'},
+                {id:'seated-press',name:'לחיצת כתפיים בישיבה',group:'כתפיים',sets:3,reps:10,unit:'ק"ג'},
+                {id:'curl',name:'כפיפת מרפק עם משקולות',group:'ידיים',sets:3,reps:12,unit:'ק"ג'},
+                {id:'pushdown',name:'פשיטת מרפק בכבל',group:'ידיים',sets:3,reps:12,unit:'ק"ג'}
+            ];
+            const tabs = [{id:'home',icon:'⌂',label:'בית'},{id:'library',icon:'≡',label:'תרגילים'},{id:'schedule',icon:'□',label:'תכנון'},{id:'workout',icon:'▶',label:'אימון'},{id:'progress',icon:'↗',label:'התקדמות'}];
+            const storageKey = 'king-evia-tracker-v1';
+            const today = () => new Date().toISOString().slice(0,10);
+            const defaults = {page:'home',hydration:0,hydrationDay:today(),energy:[],schedule:null,active:null,history:[],restEndsAt:0};
+            let state = {...defaults, ...JSON.parse(localStorage.getItem(storageKey) || '{}')};
+            const save = () => localStorage.setItem(storageKey, JSON.stringify(state));
+            const el = (selector) => document.querySelector(selector);
+            const escape = (value) => String(value).replace(/[&<>"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
+            function resetDaily() { if (state.hydrationDay !== today()) { state.hydration = 0; state.hydrationDay = today(); save(); } }
+            function moneySaved() { const quit = new Date('2024-01-01'); return Math.floor(Math.max(0, Date.now() - quit) / 86400000 / 30 * 1000); }
+            function streak() { return Math.floor(Math.max(0, Date.now() - new Date('2024-01-01')) / 86400000); }
+            function renderHome() { resetDaily(); const average = state.energy.filter(entry => entry.day === today()).reduce((sum,entry,_,arr) => sum + entry.value / arr.length, 0); return `
+                <div class="page-title">לוח בקרה אישי</div><section class="panel hero"><div class="eyebrow">אזור הניצחון</div><div class="metric">${streak()} ימים</div><div class="muted">מאז תחילת הדרך</div><div class="submetric">נחסכו ₪${moneySaved().toLocaleString('he-IL')}</div></section>
+                <div class="grid"><section class="panel"><div class="row"><h2>הידרציה</h2><span class="tag">${state.hydration}/3000 מ"ל</span></div><div class="water"><div style="height:${Math.min(state.hydration / 30, 100)}%"></div></div><div class="actions"><button class="button secondary" onclick="addWater(250)">+250</button><button class="button" onclick="addWater(500)">+500 מ"ל</button></div></section>
+                <section class="panel"><h2>אנרגיה</h2><p class="muted" style="margin-top:8px">${average ? 'ממוצע היום: ' + average.toFixed(1) + '/5' : 'איך האנרגיה כרגע?'}</p><div class="rating">${[1,2,3,4,5].map(value => `<button onclick="addEnergy(${value})">${value}</button>`).join('')}</div></section></div>
+                <section class="panel"><div class="row"><div><h2>אימון הבא</h2><p class="muted" style="margin-top:6px">${state.schedule ? state.schedule.hour + ':00 - ' + state.schedule.name : 'אין אימון מתוכנן'}</p></div><button class="button" style="flex:0" onclick="go('schedule')">תכנן</button></div></section>`; }
+            function renderLibrary() { const groups = [...new Set(exercises.map(item => item.group))]; const selected = state.filter || 'הכל'; const visible = selected === 'הכל' ? exercises : exercises.filter(item => item.group === selected); return `<div class="page-title">ספריית תרגילים מאומתת</div><section class="panel"><h2>תרגילים בטוחים</h2><select class="filter" onchange="state.filter=this.value;save();render()"><option>הכל</option>${groups.map(group => `<option ${group === selected ? 'selected':''}>${group}</option>`).join('')}</select><div>${visible.map(item => `<article class="exercise"><div class="row"><h3>${item.name}</h3><span class="tag">מאומת</span></div><p class="muted" style="margin-top:6px">${item.group} · ${item.sets} סטים של ${item.reps} · ${item.unit}</p></article>`).join('')}</div></section><p class="notice">כל התרגילים מותאמים לאימון בישיבה או בשכיבה. אין לחיצות מעל הראש בעמידה.</p>`; }
+            function renderSchedule() { const hours = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]; return `<div class="page-title">תכנון אימון</div><section class="panel"><h2>בחירת שעה</h2><p class="muted" style="margin-top:7px">בחר שעה נוחה והכן אימון מלא.</p><div class="schedule" style="margin-top:14px">${hours.map(hour => `<div class="slot"><button onclick="schedule(${hour})">${state.schedule && state.schedule.hour === hour ? 'נבחר' : 'בחר'}</button><strong>${hour}:00</strong>${state.schedule && state.schedule.hour === hour ? `<span class="muted"> · ${state.schedule.name}</span>`:''}</div>`).join('')}</div></section>`; }
+            function renderWorkout() { if (!state.active) return `<div class="page-title">אימון חי</div><section class="panel empty"><h2>עדיין אין אימון פעיל</h2><p style="margin:9px 0 16px">קבע אימון, השלם את בדיקת הבטיחות, והתחל מכאן.</p><button class="button" onclick="go('schedule')">לתכנון אימון</button></section>`; const workout = state.active; const elapsed = Math.floor((Date.now()-workout.startedAt)/1000); const rest = Math.max(0, Math.ceil((state.restEndsAt-Date.now())/1000)); return `<div class="page-title">אימון חי</div><section class="panel"><div class="eyebrow">זמן אימון</div><div class="timer">${formatTime(elapsed)}</div>${rest ? `<div class="row"><span class="tag">מנוחה: ${formatTime(rest)}</span><button class="button secondary" style="flex:0" onclick="skipRest()">דלג</button></div>`:''}</section><section class="panel"><div class="row"><h2>${workout.name}</h2><button class="button danger" style="flex:0" onclick="finishWorkout()">סיום</button></div>${workout.exercises.map((item,index) => `<article class="exercise"><div class="row"><div><h3>${item.name}</h3><p class="muted">${item.sets} סטים · יעד ${item.reps} חזרות</p></div><span class="tag">${item.group}</span></div>${Array.from({length:item.sets},(_,set) => { const logged=workout.logs[index] && workout.logs[index][set]; const ghost=lastLog(item.id,set); return `<div class="set"><strong>${set+1}</strong><input id="r-${index}-${set}" type="number" min="1" placeholder="חזרות${ghost ? ' · קודם '+ghost.reps:''}" value="${logged ? logged.reps:''}" ${logged?'disabled':''}><input id="w-${index}-${set}" type="number" min="0" step="0.5" placeholder="${item.unit}${ghost ? ' · קודם '+ghost.weight:''}" value="${logged ? logged.weight:''}" ${logged?'disabled':''}>${logged?'<span class="done">הושלם</span>':`<button onclick="logSet(${index},${set})">סיום סט</button>`}</div>`; }).join('')}</article>`).join('')}</section>`; }
+            function renderProgress() { const total = state.history.length; const recent = state.history.slice(0,7); return `<div class="page-title">היסטוריה והתקדמות</div><div class="grid"><section class="panel"><div class="eyebrow">אימונים שהושלמו</div><div class="metric">${total}</div></section><section class="panel"><div class="eyebrow">הידרציה היום</div><div class="metric">${state.hydration}<span style="font-size:1rem"> מ"ל</span></div></section></div><section class="panel"><h2>אימונים אחרונים</h2>${recent.length ? recent.map(item => `<div class="history-item"><div class="row"><strong>${escape(item.name)}</strong><span class="tag">${item.setCount} סטים</span></div><p class="muted" style="margin-top:5px">${new Date(item.finishedAt).toLocaleDateString('he-IL')} · ${formatTime(item.duration)}</p></div>`).join('') : '<p class="empty">האימונים שתשלים יופיעו כאן.</p>'}</section>`; }
+            function render() { const titles={home:'דשבורד',library:'תרגילים',schedule:'תכנון',workout:'אימון חי',progress:'התקדמות'}; el('#headerTitle').textContent=titles[state.page]; const views={home:renderHome,library:renderLibrary,schedule:renderSchedule,workout:renderWorkout,progress:renderProgress}; el('#app').innerHTML=views[state.page](); el('#nav').innerHTML=tabs.map(tab => `<button class="tab ${tab.id===state.page?'active':''}" onclick="go('${tab.id}')"><strong>${tab.icon}</strong>${tab.label}</button>`).join(''); }
+            function go(page) { state.page=page; save(); render(); }
+            function addWater(amount) { state.hydration=Math.min(3000,state.hydration+amount); save(); render(); }
+            function addEnergy(value) { state.energy.push({day:today(),value}); save(); render(); }
+            function schedule(hour) { state.schedule={hour,name:'אימון כוח מלא'}; save(); safetyModal(); render(); }
+            function safetyModal() { document.body.insertAdjacentHTML('beforeend',`<div class="modal" id="safety"><section class="modal-box"><h2>בדיקת מוכנות</h2><p class="notice">אשר שאתה מוכן לאימון ושמור על טכניקה נכונה בכל תרגיל.</p>${['ביצעתי חימום מתאים','אני מרגיש טוב וללא כאב חריג','יש לי גישה למים ולציוד תקין'].map((label,index)=>`<label class="check"><input id="safe-${index}" type="checkbox">${label}</label>`).join('')}<div class="actions"><button class="button secondary" onclick="closeModal()">ביטול</button><button id="ready" class="button" onclick="startWorkout()" disabled>אני מוכן</button></div></section></div>`); ['safe-0','safe-1','safe-2'].forEach(id=>el('#'+id).addEventListener('change',()=>el('#ready').disabled=!['safe-0','safe-1','safe-2'].every(check=>el('#'+check).checked))); }
+            function closeModal() { el('#safety')?.remove(); }
+            function startWorkout() { closeModal(); state.active={name:state.schedule?.name||'אימון כוח מלא',startedAt:Date.now(),exercises:exercises.slice(0,4),logs:{}}; state.page='workout'; save(); render(); }
+            function logSet(exerciseIndex,setIndex) { const reps=Number(el(`#r-${exerciseIndex}-${setIndex}`).value); const weight=Number(el(`#w-${exerciseIndex}-${setIndex}`).value); if (!reps || weight<0) return; state.active.logs[exerciseIndex] ||= {}; state.active.logs[exerciseIndex][setIndex]={reps,weight,id:state.active.exercises[exerciseIndex].id}; state.restEndsAt=Date.now()+75000; save(); render(); }
+            function lastLog(id,setIndex) { for (const workout of state.history) { const logged=workout.logs?.flat?.().find(item=>item?.id===id&&item.set===setIndex); if(logged) return logged; } return null; }
+            function skipRest() { state.restEndsAt=0; save(); render(); }
+            function finishWorkout() { const duration=Math.floor((Date.now()-state.active.startedAt)/1000); const logs=Object.entries(state.active.logs).flatMap(([exercise,sets])=>Object.entries(sets).map(([set,item])=>({...item,set:Number(set)}))); state.history.unshift({name:state.active.name,finishedAt:Date.now(),duration,setCount:logs.length,logs}); state.active=null; state.restEndsAt=0; state.page='progress'; save(); render(); }
+            function formatTime(seconds) { const minutes=Math.floor(seconds/60); const remaining=seconds%60; return `${String(minutes).padStart(2,'0')}:${String(remaining).padStart(2,'0')}`; }
+            setInterval(()=>{ if(state.page==='workout'&&state.active) render(); },1000);
+            if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js'));
+            render();
+        </script>
     </div>
-
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('Service Worker registered!', reg))
-                    .catch(err => console.error('Service Worker registration failed: ', err));
-            });
-        }
-    </script>
 </body>
 </html>
