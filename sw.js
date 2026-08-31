@@ -1,4 +1,4 @@
-const CACHE_NAME = 'king-evia-tracker-v6';
+const CACHE_NAME = 'king-evia-tracker-v7';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
