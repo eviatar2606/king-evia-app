@@ -1,4 +1,4 @@
-const CACHE_NAME = 'king-evia-tracker-v5';
+const CACHE_NAME = 'king-evia-tracker-v6';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -22,8 +22,21 @@ self.addEventListener('activate', event => {
   );
 });
 
-// שליפת מידע מהמטמון כשאפשר
+// Always prefer the latest deployed application shell; use cache only offline.
 self.addEventListener('fetch', event => {
+  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put('/index.html', copy));
+          return response;
+        })
+        .catch(() => caches.match('/index.html'))
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then(response => {

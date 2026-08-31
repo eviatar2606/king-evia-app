@@ -103,7 +103,10 @@
             function finishWorkout() { const duration=Math.floor((Date.now()-state.active.startedAt)/1000); const logs=Object.entries(state.active.logs).flatMap(([exercise,sets])=>Object.entries(sets).map(([set,item])=>({...item,set:Number(set)}))); state.history.unshift({name:state.active.name,finishedAt:Date.now(),duration,setCount:logs.length,logs}); state.active=null; state.restEndsAt=0; state.page='progress'; save(); render(); }
             function formatTime(seconds) { const minutes=Math.floor(seconds/60); const remaining=seconds%60; return `${String(minutes).padStart(2,'0')}:${String(remaining).padStart(2,'0')}`; }
             setInterval(()=>{ if(state.page==='workout'&&state.active) render(); },1000);
-            if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js'));
+            if ('serviceWorker' in navigator) window.addEventListener('load', async () => {
+                const registration = await navigator.serviceWorker.register('/sw.js');
+                await registration.update();
+            });
             render();
         </script>
     </div>
