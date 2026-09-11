@@ -94,8 +94,10 @@
             let syncStatus = 'Syncing';
             let saveInFlight = false;
             let saveRequested = false;
+            let changeVersion = 0;
+            let savedVersion = 0;
             const save = () => {
-                state.updatedAt = Date.now();
+                changeVersion++;
                 localStorage.setItem(storageKey, JSON.stringify(state));
                 if (cloudSyncReady) pushCloudState();
             };
@@ -103,8 +105,8 @@
             const escape = (value) => String(value).replace(/[&<>"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
             const exerciseLibrary = () => [...exercises, ...(state.customExercises || [])];
             function renderSyncStatus() { const status=el('#syncStatus'); if (status) status.textContent=syncStatus; }
-            async function pushCloudState() { if (saveInFlight) { saveRequested=true; return; } saveInFlight=true; const snapshot=JSON.stringify(state); try { syncStatus='Saving'; renderSyncStatus(); const response=await fetch(databaseUrl,{method:'PUT',headers:{'Content-Type':'application/json'},body:snapshot}); if (!response.ok) throw new Error('Cloud save failed'); syncStatus='Synced'; } catch { syncStatus='Offline'; } finally { saveInFlight=false; renderSyncStatus(); if (saveRequested) { saveRequested=false; pushCloudState(); } } }
-            async function syncCloudState() { try { const response=await fetch(databaseUrl,{cache:'no-store'}); if (!response.ok) throw new Error('Cloud read failed'); const cloudState=await response.json(); if (cloudState) { state={...defaults,...cloudState}; localStorage.setItem(storageKey,JSON.stringify(state)); render(); } syncStatus='Synced'; } catch { syncStatus='Offline'; } finally { renderSyncStatus(); } }
+            async function pushCloudState() { if (saveInFlight) { saveRequested=true; return; } saveInFlight=true; const snapshotVersion=changeVersion; const snapshot={...state,updatedAt:{'.sv':'timestamp'}}; try { syncStatus='Saving'; renderSyncStatus(); const response=await fetch(databaseUrl,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(snapshot)}); if (!response.ok) throw new Error('Cloud save failed'); const savedState=await response.json(); if (snapshotVersion===changeVersion) { state.updatedAt=savedState.updatedAt; savedVersion=snapshotVersion; localStorage.setItem(storageKey,JSON.stringify(state)); } syncStatus='Synced'; } catch { syncStatus='Offline'; } finally { saveInFlight=false; renderSyncStatus(); if (saveRequested || savedVersion<changeVersion) { saveRequested=false; pushCloudState(); } } }
+            async function syncCloudState() { try { const response=await fetch(databaseUrl,{cache:'no-store'}); if (!response.ok) throw new Error('Cloud read failed'); const cloudState=await response.json(); const shouldLoadCloud=cloudState && (!cloudSyncReady || (!saveInFlight && savedVersion===changeVersion && Number(cloudState.updatedAt||0)>Number(state.updatedAt||0))); if (shouldLoadCloud) { state={...defaults,...cloudState}; localStorage.setItem(storageKey,JSON.stringify(state)); render(); } syncStatus='Synced'; } catch { syncStatus='Offline'; } finally { renderSyncStatus(); } }
             function resetDaily() { if (state.hydrationDay !== today()) { state.hydration = 0; state.hydrationDay = today(); save(); } }
             function moneySaved() { return Math.floor(Math.max(0, Date.now() - quitDate) / 86400000 / 30 * 1000); }
             function smokeFreeTime() { const minutes=Math.floor(Math.max(0,Date.now()-quitDate)/60000); return {days:Math.floor(minutes/1440),hours:Math.floor(minutes%1440/60),minutes:minutes%60}; }
@@ -187,6 +189,7 @@
             });
             render();
             syncCloudState().finally(() => { cloudSyncReady=true; if (!state.updatedAt) save(); });
+            setInterval(syncCloudState, 10000);
         </script>
     </div>
 </body>
